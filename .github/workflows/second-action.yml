@@ -12,11 +12,11 @@ jobs:
       # Si pretendemos usar una action empleamos al palabra reservada "uses"
       # https://github.com/marketplace/actions/checkout
       uses: actions/checkout@v4
-    - name: Install NodeJS18
-      uses: actions/setup-node@v3
+    - name: Install NodeJS
+      uses: actions/setup-node@v4
       # "with"  se utiliza para especificarle algunas características de la action que estamos usando
-      with:
-        node-version: 18
+      # with:
+      #  node-version: 20
     - name: Install dependencies
       run: npm ci
     - name: Run tests
