@@ -23,6 +23,8 @@ jobs:
       run: npm test
   deploy-job:
     runs-on: ubuntu-latest
+    # Con "needs" le podemos indicar condiciones para que se ejecute como que espere a la realización de un job anterior
+    needs: building-machine-job
     steps:
     - name: Get code
       uses: actions/checkout@v4
