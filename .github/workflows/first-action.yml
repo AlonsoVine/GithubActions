@@ -1,5 +1,5 @@
 #Nombre del Workflow
-name: First Workflow
+name: 01_First Workflow
 
 #Cuando se va a ejecutar, con workfow_dispatch se espera a que sea el usuario el que manualmente lo active.
 on: workflow_dispatch

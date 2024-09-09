@@ -1,4 +1,4 @@
-name: Third workflow - Output information
+name: 02_Third workflow - Output information
 on: workflow_dispatch
 jobs:
   info:

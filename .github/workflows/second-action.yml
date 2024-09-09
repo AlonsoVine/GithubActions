@@ -1,4 +1,4 @@
-name: Second Workflow
+name: 02_Second Workflow
 
 # Evento que activa este workflow 
 # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows
