@@ -1,0 +1,26 @@
+name: Second Workflow
+
+# Evento que activa este workflow 
+# https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows
+on: push # Cada vez que se realice un push se activará este workflow
+
+jobs:
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get code
+      # Si pretendemos usar una action empleamos al palabra reservada "uses"
+      # https://github.com/marketplace/actions/checkout
+      uses: actions/checkout@v4
+    - name: Install NodeJS18
+      uses: actions/setup-node@v3
+      # "with"  se utiliza para especificarle algunas características de la action que estamos usando
+      with:
+        node-version: 18
+    - name: Install dependencies
+      run: npm ci
+    - name: Run tests
+      run: npm test
+
+
+
