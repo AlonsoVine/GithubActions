@@ -9,3 +9,7 @@ En este remositorio se almacenan en diferentes directorios el contenido de los p
     https://github.com/marketplace
 -  Marketplace de las acciones de Github - 
     https://github.com/marketplace?type=actions
+-  Curso de Udemy -
+    https://www.udemy.com/course/github-actions-the-complete-guide/?couponCode=24T4MT90924A
+-  Curso de Microsoft Learn -
+    https://learn.microsoft.com/en-us/collections/106s0w086xd6m
