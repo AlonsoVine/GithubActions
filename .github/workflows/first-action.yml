@@ -16,5 +16,9 @@ jobs:
       - name: Print greeting
       # Run te permite correr un comando en la máquina
         run: echo "Hello world!"
+      - name: Multiline step 
+        run: |
+          echo "First output"
+          echo "Second output"
       - name: Print goodbye
         run: echo "Goodbye world!"
