@@ -2,7 +2,8 @@ name: Second Workflow
 
 # Evento que activa este workflow 
 # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows
-on: push # Cada vez que se realice un push se activará este workflow
+ # Cada vez que se realice un push o se lance manualmente se activará este workflow
+on: [push, workflow_dispatch]
 
 jobs:
   building-machine-job:
