@@ -1,7 +1,11 @@
 name: Events Demo 1
 on: 
   pull_request:
-    types: [opened, synchronize]
+    types: opened
+    branches:
+      - main #main
+      - 'dev-*' #dev-new dev-this ...
+      - 'feat/**' #feat/new feat/new/button
   workflow_dispatch:
 jobs:
   deploy:
