@@ -1,0 +1,20 @@
+#Nombre del Workflow
+name: First Workflow
+
+#Cuando se va a ejecutar, con workfow_dispatch se espera a que sea el usuario el que manualmente lo active.
+on: workflow_dispatch
+
+#Jobs es para definir los trabajos que ha de realizar este workflow
+jobs:
+  # Le ponemos un nombre al trabajo
+  first-job:
+    # Definimos la máquina donde se va a ejecutar.
+    runs-on: ubuntu-latest
+    # Una lista de los pasos que ha de ejecutar.
+    steps:
+      # Le damos un nombre a este paso
+      - name: Print greeting
+      # Run te permite correr un comando en la máquina
+        run: echo "Hello world!"
+      - name: Print goodbye
+        run: echo "Goodbye world!"
