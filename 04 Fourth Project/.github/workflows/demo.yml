@@ -36,5 +36,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      # Es conveniente añadir el needs referenciando a build porque necesitamos los artefactos generados en ese job.
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          - name: dist-files
+      - name: Output contents
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
