@@ -12,6 +12,8 @@ En este remositorio se almacenan en diferentes directorios el contenido de los p
         https://github.com/marketplace?type=actions
     - Readme de Github Actions - Upload Artifact
         https://github.com/actions/upload-artifact
+    - Readme de Github Actions - Contexts
+        https://docs.github.com/en/actions/learn-github-actions/contextshttps://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs
 - Recursos adicionales:
     -  Curso de Udemy -
         https://www.udemy.com/course/github-actions-the-complete-guide/?couponCode=24T4MT90924A
