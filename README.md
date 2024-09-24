@@ -28,6 +28,10 @@ En este remositorio se almacenan en diferentes directorios con el nombre de **'_
         https://github.com/actions/upload-artifact
     - Readme de Github Actions - Contexts
         https://docs.github.com/en/actions/learn-github-actions/contextshttps://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs
+
+- Repositorios de refuerzo:
+    - https://github.com/AlonsoVine/skills-hello-github-actions
+
 - Recursos adicionales:
     -  Curso de Udemy -
         https://www.udemy.com/course/github-actions-the-complete-guide/?couponCode=24T4MT90924A
