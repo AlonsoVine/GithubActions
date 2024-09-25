@@ -13,9 +13,11 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        # Verificamos si tenemos en cache guardado y si no es así procedemos a realizar una instalación de las dependencias
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Lint code
         run: npm run lint
@@ -28,11 +30,15 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        # Verificamos si tenemos en cache guardado y si no es así procedemos a realizar una instalación de las dependencias
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Test code
+        # Informamos a este trabajo de que debe continuar incluso si falla este paso (Y da el trabajo por satisfactorio, de cara a los otros trabajos pendientes de él(needs)).
+        continue-on-error: true
         # Asignamos un id unívoco a este step para referenciarlo en el siguiente
         id: run-tests
         run: npm run test
@@ -53,9 +59,11 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
+        # Verificamos si tenemos en cache guardado y si no es así procedemos a realizar una instalación de las dependencias
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Build website
         id: build-website
@@ -77,3 +85,11 @@ jobs:
         run: ls
       - name: Deploy
         run: echo "Deploying..."
+  # Este job solo se ejecutará si falla y después de realizar los de lint y deploy.
+  report:
+    needs: [lint,  deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: echo ${{ toJSON(github)}}
