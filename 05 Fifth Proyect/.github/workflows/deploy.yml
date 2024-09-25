@@ -31,11 +31,13 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Output information
-        # Este caso SÏ mostrará ambas variables de entorno porque tiene ambas accesibles, 
-        # la primera en el promio job y la segunda a nivel general del workflow.      
+        # Este caso SÍ mostrará ambas variables de entorno porque tiene ambas accesibles, 
+        # la primera en el promio job y la segunda a nivel general del workflow,
+        # para la tercera tiene acceso pero no lostrará porque github identifica esa variable como un secreto del repositorio.      
         run: |
           echo "MONGODB_USERNAME: ${{ env.MONGDB_USERNAME }}"
           echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+          echo "MONGODB_PASSWORD: $MONGODB_PASSWORD"
 
   deploy:
     needs: test
