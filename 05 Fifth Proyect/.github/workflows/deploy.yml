@@ -4,8 +4,16 @@ on:
     branches:
       - main
       - dev
+env:
+  - MONGODB_DB_name: gha-demo
 jobs:
   test:
+    env:
+      MONGODB_CLUSTER_ADDRES: cluster0.15pwqcc.mongodb.net
+      MONGODB_USERNAME: alonso
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD}}
+      PORT: 8080
+    runs-on: ubuntu-latest
     environment: testing
     runs-on: ubuntu-latest
     steps:
@@ -19,15 +27,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run server
-        run: npm start & npx wait-on http://127.0.0.1:XYZ
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
         run: npm test
       - name: Output information
-        run: echo "..."
+        # Este caso SÏ mostrará ambas variables de entorno porque tiene ambas accesibles, 
+        # la primera en el promio job y la segunda a nivel general del workflow.      
+        run: |
+          echo "MONGODB_USERNAME: ${{ env.MONGDB_USERNAME }}"
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
+
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Output information
+        # Este caso NO mostrará ambas variables de entorno porque , 
+        # la primera no está disponible para este job porque fue definida en el job de test.  
         run: |        
-          echo "..."
+          echo "MONGODB_USERNAME: ${{ env.MONGDB_USERNAME }}"
+          echo "MONGODB_DB_NAME: $MONGODB_DB_NAME"
