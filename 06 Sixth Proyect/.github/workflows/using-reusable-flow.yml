@@ -1,0 +1,100 @@
+name: Using Reusable Workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        # Verificamos si tenemos en cache guardado y si no es así procedemos a realizar una instalación de las dependencias
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Lint code
+        run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        # Verificamos si tenemos en cache guardado y si no es así procedemos a realizar una instalación de las dependencias
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Test code
+        # Informamos a este trabajo de que debe continuar incluso si falla este paso (Y da el trabajo por satisfactorio, de cara a los otros trabajos pendientes de él(needs)).
+        continue-on-error: true
+        # Asignamos un id unívoco a este step para referenciarlo en el siguiente
+        id: run-tests
+        run: npm run test
+      - name: Upload test report
+        # Evaluamos si falló el paso anterior(run-tests) para realizar este step.
+        if: failure() && steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: test.json
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        # Verificamos si tenemos en cache guardado y si no es así procedemos a realizar una instalación de las dependencias
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: Build website
+        id: build-website
+        run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: dist
+  deploy:
+    needs: build
+    # Le especificamos una ruta completa al otro workflow que queremos utilizar.
+    uses: ./.github/workflows/reusable.yml
+    # Especifico el nombre de los artefactos que le paso al workflow
+    with:
+      artifact-name: dist-files
+    # Aquí se le añadiían los secretos que va a usar el workflow
+    # secrets:
+    #  some-secrets: ${{ secrets.some-secrets }}
+  # Este job solo se ejecutará si falla y después de realizar los de lint y deploy.
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    setps:
+      -name: Print deploy output
+        run: echo "${{ needs.deploy.outputs.result }}"
+
+  report:
+    needs: [lint,  deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: echo ${{ toJSON(github)}}

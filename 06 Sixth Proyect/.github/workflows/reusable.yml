@@ -1,10 +1,36 @@
 name: Reusable Deploy
 # Se ejecutará cuando sea llamado por otro workflow
-on: workflow_call
+on:
+  # Aquí definimos el input del workflow, en este caso 
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: The name of the deployable artifact files
+        required: false
+        default: dist
+        type: string
+    outputs:
+      result:
+        description: The result of the deployment operation
+        value: jobs.deploy.outputs.outcome
+    # secrets:
+    #  some-secrets:
+    #    required: false
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.set-result.outputs.step-result }}
     runs-on: ubuntu-latest
     steps:
+      - name: Get Code form Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact-name }}
+      -name: List files
+        run: ls
       -name: Output information
-        run: echo "Deploying & Uploading"
+        run: echo "Deploying & Uploading from another workflow"
+      -name: Set Result Output
+        id: set-result 
+        run: echo "::set-output name=step-result::'success'"
 
