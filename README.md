@@ -36,12 +36,16 @@ En este remositorio se almacenan en diferentes directorios con el nombre de **'_
         https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables#default-environment-variables
 
 - Repositorios de refuerzo:
-    - https://github.com/AlonsoVine/skills-hello-github-actions
+    -  Repositorio práctica con Github Actions -
+        https://github.com/AlonsoVine/skills-hello-github-actions
+    -  Repositorio oficial de imágenes Docker -
+        https://hub.docker.com/
+
 
 - Recursos adicionales:
-    -  Curso de Udemy -
+    -  Curso de Udemy - 
         https://www.udemy.com/course/github-actions-the-complete-guide/?couponCode=24T4MT90924A
-    -  Curso de Microsoft Learn -
+    -  Curso de Microsoft Learn - 
         https://learn.microsoft.com/en-us/collections/106s0w086xd6m
     - MongoDB oficial- para crear una BBDD
         https://www.mongodb.com/es
