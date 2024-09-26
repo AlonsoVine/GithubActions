@@ -31,7 +31,7 @@ En este remositorio se almacenan en diferentes directorios con el nombre de **'_
     -  Github Actions - Contexts
         https://docs.github.com/es/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs
     -  Github Actions - Github Variables
-        https://docs.github.com/en/actions/learn-github-actions/contextshttps://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs
+        https://docs.github.com/es/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables
     - Github Actions - Variables de entorno
         https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables#default-environment-variables
 
