@@ -1,0 +1,11 @@
+name: 'Deploy to AWS S3'
+description: 'Deploy a static website via AWS S·'
+runs:
+  using: 'node16'
+  # Se puede usar pre: & post: para ejecutar otros .js antes y después de main:
+  main: 'main.js'
+
+
+# Ejecutamos un npm init -y para generar el package.json de este directorio.
+# Instalamos las siguientes dependencias que usaremos en nuestro archivo de Javascript: 
+# npm install @actions/core @actions/github @actions/exec
