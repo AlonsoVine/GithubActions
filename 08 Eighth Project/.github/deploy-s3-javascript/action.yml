@@ -1,5 +1,16 @@
 name: 'Deploy to AWS S3'
 description: 'Deploy a static website via AWS S·'
+inputs:
+  bucket: 
+    description: 'The S3 AWS bucket name.'
+    required: true
+  bucket-region: 
+    description: 'S3 AWS bucket region'
+    required: false
+    default: 'us-east-1'
+  dist-folder:
+    description: 'The folder containing the deployable files.'
+    required: true
 runs:
   using: 'node16'
   # Se puede usar pre: & post: para ejecutar otros .js antes y después de main:
